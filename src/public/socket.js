@@ -10,5 +10,7 @@ export const saveSospechoso = (id_camara, nombre_img, img_match, unidad) => {
 };
 
 export const onNewSospechoso = (callback) => {
-    socket.on("server:newSospechoso", callback);
+    socket.on("server:newSospechoso", (data)=>{
+        console.log(data)
+    });
 };

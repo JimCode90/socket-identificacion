@@ -1,5 +1,6 @@
 import {
     createSospechoso,
+    getSospechoso
 } from "./models/sospechosos.js";
 
 export default (io) => {
@@ -9,9 +10,10 @@ export default (io) => {
 
 
         socket.on("client:newSospechoso", async (data) => {
-            console.log(data)
             const result = await createSospechoso(data);
-            // io.emit("server:newSospechoso", { ...data, id: result.insertId });
+            const result2 = await getSospechoso(data.nombre_img)
+            console.log(result2)
+            io.sockets.emit("SERVER_NEWSOSPECHOSO", { ...result2 });
         });
 
         socket.on("disconnect", () => {
