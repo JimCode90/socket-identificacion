@@ -9,6 +9,7 @@ import {
 export const getConnection = async () => {
     try {
         const pool = createPool({
+            connectionLimit : 1000,
             host: MYSQL_HOST,
             user: MYSQL_USER,
             password: MYSQL_PASSWORD,
