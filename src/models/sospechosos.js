@@ -10,10 +10,19 @@ export const createSospechoso = async (newSospechoso) => {
     return result[0];
 }
 
+// export const getSospechoso = async (foto) => {
+//     console.log(foto)
+//     const conn = await getConnection();
+//     const [result] = await conn.query(`SELECT MP.nombre_img, MP.img_match, P.nombres, P.apellidos,P.nro_doc, P.id FROM match_personas as MP inner join personas as P where P.url_foto = ?`, [foto])
+//     conn.end();
+//     return result[0];
+//
+// }
+
 export const getSospechoso = async (foto) => {
     console.log(foto)
     const conn = await getConnection();
-    const [result] = await conn.query(`SELECT MP.nombre_img, MP.img_match, P.nombres, P.apellidos,P.nro_doc, P.id FROM match_personas as MP inner join personas as P where P.url_foto = ?`, [foto])
+    const [result] = await conn.query(`SELECT * FROM personas where url_foto = ?`, [foto])
     conn.end();
     return result[0];
 

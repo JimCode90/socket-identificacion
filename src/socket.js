@@ -12,19 +12,18 @@ export default (io) => {
 
         socket.on("client:newSospechoso", async (data) => {
             const ultimoResult = await getUltimoSospechoso();
-            console.log(typeof ultimoResult)
-            console.log(ultimoResult)
             if (ultimoResult === undefined) {
                 const result = await createSospechoso(data);
+                console.log(data)
                 const result2 = await getSospechoso(data.nombre_img)
-                io.sockets.emit("SERVER_NEWSOSPECHOSO", { ...result2 });
+                io.sockets.emit("SERVER_NEWSOSPECHOSO", { ...result2, ...data });
                 return;
 
             }
             if (ultimoResult.nombre_img !== data.nombre_img){
                 const result = await createSospechoso(data);
                 const result2 = await getSospechoso(data.nombre_img)
-                io.sockets.emit("SERVER_NEWSOSPECHOSO", { ...result2 });
+                io.sockets.emit("SERVER_NEWSOSPECHOSO", { ...result2, ...data });
             }
         });
 
